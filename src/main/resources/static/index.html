@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caesar Cipher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="page">
+  <header class="intro">
+    <h1>Caesar Cipher</h1>
+    <p>Julius Caesar hid his messages by sliding every letter along the alphabet. Turn the disc, type a message, and watch it change.</p>
+  </header>
+
+  <section class="stage">
+    <div class="wheel-wrap">
+      <svg id="wheel" viewBox="0 0 400 400" role="img" aria-label="Cipher disc showing the plain alphabet on the outside and the shifted alphabet on the inside"></svg>
+      <p class="wheel-note">Outer ring: plain letters. Inner ring: cipher letters.</p>
+    </div>
+
+    <div class="panel">
+      <div class="modes" role="tablist" aria-label="Mode">
+        <button id="m-enc" role="tab" aria-selected="true">Encrypt</button>
+        <button id="m-dec" role="tab" aria-selected="false">Decrypt</button>
+      </div>
+
+      <div class="field">
+        <label for="key">Shift by <output id="keyOut">3</output></label>
+        <input id="key" type="range" min="1" max="25" value="3">
+      </div>
+
+      <div class="field">
+        <label for="input" id="inLabel">Your message</label>
+        <textarea id="input" rows="4" spellcheck="false">Meet me at the library at 5 PM!</textarea>
+      </div>
+
+      <div class="field">
+        <div class="row">
+          <label for="output" id="outLabel">Secret message</label>
+          <div class="actions">
+            <button id="swap" class="ghost" type="button">Use as input</button>
+            <button id="copy" class="ghost" type="button">Copy</button>
+          </div>
+        </div>
+        <textarea id="output" rows="4" readonly></textarea>
+      </div>
+
+      <div class="strip" aria-label="Letter mapping">
+        <div><span>Plain</span><code id="plainStrip"></code></div>
+        <div><span>Cipher</span><code id="cipherStrip"></code></div>
+      </div>
+    </div>
+  </section>
+
+  <details class="brute">
+    <summary>No key? Try all 25 shifts</summary>
+    <p class="hint">Only 25 keys exist, so a Caesar cipher is easy to break. Look for the line that reads like English.</p>
+    <ol id="bruteList"></ol>
+  </details>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
