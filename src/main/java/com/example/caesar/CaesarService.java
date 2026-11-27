@@ -4,11 +4,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CaesarService {
-
+    //Function for encryption
     public String encrypt(String text, int key) {
         return shift(text, key);
     }
-
+    //Fucntion for Decription
     public String decrypt(String text, int key) {
         return shift(text, -key);
     }
