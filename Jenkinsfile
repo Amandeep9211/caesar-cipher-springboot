@@ -27,8 +27,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 bat(script: 'for /f "tokens=5" %%a in (\'netstat -aon ^| findstr :8082 ^| findstr LISTENING\') do taskkill /F /PID %%a', returnStatus: true)
+                bat 'if not exist C:\\caesar-deploy mkdir C:\\caesar-deploy'
+                bat 'copy /Y target\\caesar-springboot-1.0.jar C:\\caesar-deploy\\app.jar'
                 withEnv(['JENKINS_NODE_COOKIE=dontKillMe', 'BUILD_ID=dontKillMe']) {
-                    bat 'start /B java -jar target/caesar-springboot-1.0.jar > app.log 2>&1'
+                    bat 'start /B java -jar C:\\caesar-deploy\\app.jar > C:\\caesar-deploy\\app.log 2>&1'
                 }
                 sleep 15
             }
